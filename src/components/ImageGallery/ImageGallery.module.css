@@ -1,0 +1,25 @@
+.galleryList {
+  padding-top: 50px;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 30px;
+  row-gap: 20px;
+}
+
+.galleryList li {
+  width: 250px;
+}
+
+.galleryList img {
+  width: 250px;
+  height: 230px;
+  cursor: zoom-in;
+  border-radius: 4px;
+}
+
+.galleryList img:hover {
+  transform: scale(1.005);
+  box-shadow: 0px 0px 20px -5px #04051d;
+}
