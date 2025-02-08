@@ -1,30 +1,44 @@
-/* eslint-disable react/prop-types */
 import Modal from 'react-modal';
-import css from "./ImageModal.module.css"
+import css from './ImageModal.module.css';
 
 Modal.setAppElement('#root');
 
-const ImageModal = ({ photoInfo, onModalClose }) => {
-  
+interface IGalleryProps {
+  modalOpenPicInfo: {
+    urls: {
+      regular: string;
+    };
+    user: {
+      instagram_username: string;
+    };
+    likes: string;
+    description: string;
+  };
+  onModalClose: () => void;
+}
+
+const ImageModal: React.FC<IGalleryProps> = ({
+  modalOpenPicInfo,
+  onModalClose,
+}) => {
   return (
-      <Modal
-          isOpen={!!photoInfo}
-          onRequestClose={onModalClose}
-          className={css.modal}
-           overlayClassName={css.overlay}
-      >
-      {photoInfo &&
+    <Modal
+      isOpen={!!modalOpenPicInfo}
+      onRequestClose={onModalClose}
+      className={css.modal}
+      overlayClassName={css.overlay}
+    >
+      {modalOpenPicInfo && (
         <div>
-          <img className={css.modalImg} src={photoInfo.urls.regular} />
-        <div className={css.imageTextDiv}>
-          <p>@{photoInfo.user.instagram_username}</p>
-          <p>Likes: {photoInfo.likes}</p>
+          <img className={css.modalImg} src={modalOpenPicInfo.urls.regular} />
+          <div className={css.imageTextDiv}>
+            <p>@{modalOpenPicInfo.user.instagram_username}</p>
+            <p>Likes: {modalOpenPicInfo.likes}</p>
           </div>
         </div>
-      }
-          
+      )}
     </Modal>
-  )
-}
+  );
+};
 
 export default ImageModal;

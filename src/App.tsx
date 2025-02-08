@@ -3,20 +3,28 @@ import './App.css';
 import SearchBar from './components/SearchBar/SearchBar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
 import ErrorMessage from './components/ErrorMessage/ErrorMessage';
-import Loader from './components/Loader/Loader'
+import Loader from './components/Loader/Loader';
 import LoadMorebtn from './components/LoadMorebtn/LoadMorebtn';
-import fetchPhotos from './fetchFn'
+import fetchPhotos from './fetchFn';
 import ImageModal from './components/ImageModal/ImageModal';
-
-
+export interface IGallery {
+  urls: {
+    regular: string;
+    small: string;
+  };
+  user: {
+    instagram_username: string;
+  };
+  likes: string;
+  description: string;
+}
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [gallery, setGallery] = useState([]);
+  const [gallery, setGallery] = useState<Gallery[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isModalOpen, setIsModalOpen] = useState<Gallery | null>(null);
 
   useEffect(() => {
     if (searchQuery.trim() === '') {
@@ -27,50 +35,53 @@ function App() {
       try {
         setIsError(false);
         setIsLoading(true);
-    
+
         const results = await fetchPhotos(searchQuery, page);
-        
-        setGallery((prev) => [...prev, ...results])
-      } catch {
+
+        setGallery((prev) => [...prev, ...results]);
+      } catch (e) {
         setIsError(true);
+        console.log('Search error: ', e);
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
     }
-  
-    handleSearch()
-  }, [searchQuery, page])
 
+    handleSearch();
+  }, [searchQuery, page]);
 
-  
   async function changePage() {
-    await setPage(prev => prev + 1)
+    setPage((prev) => prev + 1);
   }
 
-  function handleChangeQuery(newQuery) {
+  function handleChangeQuery(newQuery: string): void {
     if (newQuery === searchQuery) return;
     setSearchQuery(newQuery);
     setPage(1);
-    setGallery([])
+    setGallery([]);
   }
 
-  function openModal(photo){
+  function openModal(photo: Gallery): void {
     setIsModalOpen(photo);
   }
-  
-  function closeModal(){
-    setIsModalOpen(false);
-    }
- 
+
+  function closeModal(): void {
+    setIsModalOpen(null);
+  }
+
   return (
     <>
-      <SearchBar handleChangeQuery={handleChangeQuery}/>
-      {isLoading && <Loader/>}
-      {isError && <ErrorMessage/>}
-      {gallery && gallery.length > 0 && <ImageGallery pics={gallery} onImageClick={openModal}/>  }
+      <SearchBar handleChangeQuery={handleChangeQuery} />
+      {isLoading && <Loader />}
+      {isError && <ErrorMessage />}
+      {gallery && gallery.length > 0 && (
+        <ImageGallery pics={gallery} onImageClick={openModal} />
+      )}
       {gallery && gallery.length > 0 && <LoadMorebtn changePage={changePage} />}
-      {isModalOpen && <ImageModal photoInfo={isModalOpen} onModalClose={closeModal}/>}
+      {isModalOpen && (
+        <ImageModal modalOpenPicInfo={isModalOpen} onModalClose={closeModal} />
+      )}
     </>
-  )
+  );
 }
-  export default App;
+export default App;

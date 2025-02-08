@@ -1,9 +1,15 @@
-/* eslint-disable react/prop-types */
-import css from './LoadMorebtn.module.css'
-const LoadMorebtn = ({changePage}) => {
-  return (
-    <button className={css.loadMoreBtn} onClick={changePage}>MORE</button>
-  )
-}
+import css from './LoadMorebtn.module.css';
+import React from 'react';
 
-export default LoadMorebtn
+interface ILoadMoreBtnProps {
+  changePage: () => void;
+}
+const LoadMorebtn: React.FC<ILoadMoreBtnProps> = ({ changePage }) => {
+  return (
+    <button className={css.loadMoreBtn} onClick={changePage}>
+      MORE
+    </button>
+  );
+};
+
+export default LoadMorebtn;
