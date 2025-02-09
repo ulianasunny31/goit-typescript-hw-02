@@ -5,7 +5,7 @@ import { IGallery } from '../../App';
 
 interface IGalleryProps {
   pics: IGallery[];
-  onImageClick: (pic: unknown) => void;
+  onImageClick: (pic: IGallery) => void;
 }
 
 const ImageGallery: React.FC<IGalleryProps> = ({ pics, onImageClick }) => {

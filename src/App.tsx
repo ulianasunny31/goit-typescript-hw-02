@@ -21,10 +21,10 @@ export interface IGallery {
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [gallery, setGallery] = useState<Gallery[]>([]);
+  const [gallery, setGallery] = useState<IGallery[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState<Gallery | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<IGallery | null>(null);
 
   useEffect(() => {
     if (searchQuery.trim() === '') {
@@ -61,7 +61,7 @@ function App() {
     setGallery([]);
   }
 
-  function openModal(photo: Gallery): void {
+  function openModal(photo: IGallery): void {
     setIsModalOpen(photo);
   }
 
