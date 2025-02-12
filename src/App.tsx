@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import SearchBar from './components/SearchBar/SearchBar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
@@ -15,7 +15,7 @@ export interface IGallery {
   user: {
     instagram_username: string;
   };
-  likes: string;
+  likes: number;
   description: string;
 }
 function App() {
@@ -70,18 +70,21 @@ function App() {
   }
 
   return (
-    <>
-      <SearchBar handleChangeQuery={handleChangeQuery} />
-      {isLoading && <Loader />}
-      {isError && <ErrorMessage />}
-      {gallery && gallery.length > 0 && (
-        <ImageGallery pics={gallery} onImageClick={openModal} />
-      )}
-      {gallery && gallery.length > 0 && <LoadMorebtn changePage={changePage} />}
-      {isModalOpen && (
-        <ImageModal modalOpenPicInfo={isModalOpen} onModalClose={closeModal} />
-      )}
-    </>
-  );
+     <> 
+ <SearchBar handleChangeQuery={handleChangeQuery} />
+  {isLoading && <Loader />}
+  {isError && <ErrorMessage />}
+  {gallery && gallery.length > 0 && (
+    <ImageGallery pics={gallery} onImageClick={openModal} />
+  )}
+  {gallery && gallery.length > 0 && <LoadMorebtn changePage={changePage} />}
+  {isModalOpen && (
+    <ImageModal modalOpenPicInfo={isModalOpen} onModalClose={closeModal} />
+  )
 }
+  
+   </>
+ 
+}
+ 
 export default App;

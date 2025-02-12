@@ -11,7 +11,7 @@ interface IGalleryProps {
     user: {
       instagram_username: string;
     };
-    likes: string;
+    likes: number;
     description: string;
   };
   onModalClose: () => void;
