@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, JSX } from 'react';
 import './App.css';
 import SearchBar from './components/SearchBar/SearchBar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
@@ -18,7 +18,7 @@ export interface IGallery {
   likes: number;
   description: string;
 }
-function App() {
+function App(): JSX.Element {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [gallery, setGallery] = useState<IGallery[]>([]);
