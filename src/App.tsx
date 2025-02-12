@@ -19,11 +19,11 @@ export interface IGallery {
   description: string;
 }
 function App(): JSX.Element {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const [gallery, setGallery] = useState<IGallery[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [page, setPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [page, setPage] = useState<number>(1);
   const [isModalOpen, setIsModalOpen] = useState<IGallery | null>(null);
 
   useEffect(() => {
