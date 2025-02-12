@@ -70,21 +70,19 @@ function App() {
   }
 
   return (
-     <> 
- <SearchBar handleChangeQuery={handleChangeQuery} />
-  {isLoading && <Loader />}
-  {isError && <ErrorMessage />}
-  {gallery && gallery.length > 0 && (
-    <ImageGallery pics={gallery} onImageClick={openModal} />
-  )}
-  {gallery && gallery.length > 0 && <LoadMorebtn changePage={changePage} />}
-  {isModalOpen && (
-    <ImageModal modalOpenPicInfo={isModalOpen} onModalClose={closeModal} />
-  )
+    <>
+      <SearchBar handleChangeQuery={handleChangeQuery} />
+      {isLoading && <Loader />}
+      {isError && <ErrorMessage />}
+      {gallery && gallery.length > 0 && (
+        <ImageGallery pics={gallery} onImageClick={openModal} />
+      )}
+      {gallery && gallery.length > 0 && <LoadMorebtn changePage={changePage} />}
+      {isModalOpen && (
+        <ImageModal modalOpenPicInfo={isModalOpen} onModalClose={closeModal} />
+      )}
+    </>
+  );
 }
-  
-   </>
- 
-}
- 
+
 export default App;
